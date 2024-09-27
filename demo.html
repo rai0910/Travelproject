@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Group Slider</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .slider-container {
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .slide {
+            flex: 0 0 300px; /* Adjust the width as needed */
+            margin-right: 10px;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+    </style>
+</head>
+<body>
+
+<div class="slider-container">
+    <div class="controls">
+        <button class="prev-button">Previous</button>
+        <button class="next-button">Next</button>
+    </div>
+    
+    <div class="slider">
+        <div class="slide">
+            <img src="image1.jpg" alt="Image 1">
+        </div>
+        <div class="slide">
+            <img src="image2.jpg" alt="Image 2">
+        </div>
+        <div class="slide">
+            <img src="image3.jpg" alt="Image 3">
+        </div>
+        <div class="slide">
+            <img src="image4.jpg" alt="Image 4">
+        </div>
+        <!-- Add more slides as needed -->
+    </div>
+</div>
+
+<script src="script.js">
+    document.addEventListener("DOMContentLoaded", function() {
+        const slider = document.querySelector(".slider");
+        const slides = document.querySelectorAll(".slide");
+    
+        let currentIndex = 0;
+    
+        function slideTo(index) {
+            if (index < 0) {
+                index = slides.length - 1;
+            } else if (index >= slides.length) {
+                index = 0;
+            }
+    
+            const translateX = -index * 310; // Adjust the value based on the slide width
+    
+            slider.style.transform = `translateX(${translateX}px)`;
+            currentIndex = index;
+        }
+    
+        function nextSlide() {
+            slideTo(currentIndex + 1);
+        }
+    
+        function prevSlide() {
+            slideTo(currentIndex - 1);
+        }
+    
+        document.querySelector(".next-button").addEventListener("click", nextSlide);
+        document.querySelector(".prev-button").addEventListener("click", prevSlide);
+    });
+    
+</script>
+</body>
+</html>
